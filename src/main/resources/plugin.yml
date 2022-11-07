@@ -1,0 +1,7 @@
+name: SimpleJoin
+version: '${project.version}'
+main: com.github.akagiant.simplejoin.SimpleJoin
+api-version: 1.19
+authors: [ AkaGiant ]
+description: A Simple Join and Leave Plugin designed for public usage, designed for those who just want basic features for their server.
+website: github.com/AkaGiant

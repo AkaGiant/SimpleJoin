@@ -1,0 +1,39 @@
+# The default config file is designed for a simple setup.
+# For more complex setups check the github examples.
+
+reload-message:
+
+global-settings:
+  first-join:
+    # Optional: If removed, it will default to true.
+    # If set to false, when a player joins for the first
+    # time, no "default first join message" will be displayed.
+    enabled: true
+    # Optional: If no sound-effect is provided, nothing will play.
+    sound-effect: UI_TOAST_CHALLENGE_COMPLETE
+    message:
+    title-message:
+      title:
+      sub-title:
+      settings:
+        fade-in:
+        stay:
+        fade-out:
+  # OPTIONAL
+  # Played for every player when they join no matter their permission.
+  # If a group has a sound effect, this is nullified for them.
+  sound-effect:
+  groups:
+    owner:
+      # Optional: A List of groups that will receive this message when the player joins
+      visible-by:
+        - management
+      on-join:
+        message:
+          # Optional: If no message type is provided it will default to a normal message.
+          # Options: STANDARD/TITLE/BOSS-BAR
+          # You can have multiple types
+          type: STANDARD
+      on-quit:
+    management:
+      # If no visible-by is provided, all players will see the on-join and on-quit message.
