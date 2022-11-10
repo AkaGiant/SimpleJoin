@@ -5,35 +5,100 @@ reload-message:
 
 global-settings:
   first-join:
-    # Optional: If removed, it will default to true.
-    # If set to false, when a player joins for the first
-    # time, no "default first join message" will be displayed.
-    enabled: true
-    # Optional: If no sound-effect is provided, nothing will play.
-    sound-effect: UI_TOAST_CHALLENGE_COMPLETE
-    message:
-    title-message:
-      title:
-      sub-title:
-      settings:
-        fade-in:
-        stay:
-        fade-out:
-  # OPTIONAL
-  # Played for every player when they join no matter their permission.
-  # If a group has a sound effect, this is nullified for them.
-  sound-effect:
-  groups:
-    owner:
-      # Optional: A List of groups that will receive this message when the player joins
-      visible-by:
-        - management
-      on-join:
-        message:
-          # Optional: If no message type is provided it will default to a normal message.
-          # Options: STANDARD/TITLE/BOSS-BAR
-          # You can have multiple types
-          type: STANDARD
-      on-quit:
-    management:
-      # If no visible-by is provided, all players will see the on-join and on-quit message.
+    enabled: true # You CAN remove this altogether, by doing so it will default to TRUE
+    to-player:
+      # What sound effects should be played to the player when they first join?
+      # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
+      sound-effect:
+        sound: UI_TOAST_CHALLENGE_COMPLETE
+        settings:
+          volume: 1
+          pitch: 1
+      # What Effects should be given to the player when they join for the first time?
+      # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/potion/PotionEffectType.html
+      effects:
+        1:
+          # Will apply Strength 4, for 100 seconds to the player.
+          effect: STRENGTH
+          duration: 100
+          level: 4 # FULL NUMBER ONLY
+        2:
+          effect: HASTE
+          duration: 10000
+          level: 10 # FULL NUMBER ONLY
+
+      commands:
+        - "/say hello %player_name%"
+        - "/my custom epic command here"
+      # Settings for a Custom Title Message
+      title-message:
+        title: "MY EPIC TITLE"
+        sub-title: "MY EPIC SUB TITLE"
+        settings:
+          fade-in: 1
+          stay: 7
+          fade-out: 2
+          duration: 5
+      # Settings for a Custom Boss Bar
+      boss-bar:
+        title: "MY EPIC TITLE"
+        color: BLUE
+        style: SOLID
+        flags:
+          - CREATE_FOG
+      # Settings for a Custom Message
+      message:
+        - "line 1"
+        - "line 2"
+      # Settings for a Custom Action Bar
+      action-bar: "This will appear above the player's hot bar"
+
+    # Settings for messages shown to all online players (EXCLUDING THE PLAYER THAT JOINED)
+    to-everyone-online:
+      # What sound effects should be played to every player online when someone
+      # joins for the first time? (EXCLUDING THE PLAYER THAT JOINED)
+      # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
+      sound-effect:
+        sound: UI_TOAST_CHALLENGE_COMPLETE
+        settings:
+          volume: 1
+          pitch: 1
+      # What effects should be played to every player online when someone
+      # joins for the first time? (EXCLUDING THE PLAYER THAT JOINED)
+      # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/potion/PotionEffectType.html
+      effects:
+        1:
+          # Will apply Strength 4, for 100 seconds to the player.
+          effect: STRENGTH
+          duration: 100
+          level: 4 # FULL NUMBER ONLY
+        2:
+          effect: HASTE
+          duration: 10000
+          level: 10 # FULL NUMBER ONLY
+      # Commands will be ran for every player so I really would NOT recommend using any
+      # broadcast command here!
+      commands:
+        - "/say hello %player_name% joined "
+        - "/my custom epic command here"
+      # Settings for a Custom Title Message
+      title-message:
+        title: "%player_name% joined for the first time!"
+        sub-title: "give them a fat hello!"
+        settings:
+          fade-in: 1
+          stay: 7
+          fade-out: 2
+      # Settings for a Custom Boss Bar
+      boss-bar:
+        title: "%player_name% joined for the first time!"
+        color: BLUE
+        style: SOLID
+        flags:
+          - CREATE_FOG
+      # Settings for a Custom Message
+      message:
+        - "%player_name% joined for the first time!"
+        - "line 2"
+      # Settings for a Custom Action Bar
+      action-bar: "%player_name% joined for the first time!"

@@ -42,6 +42,13 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <minimizeJar>true</minimizeJar>
+                            <relocations>
+                                <relocation>
+                                    <pattern>dev.jorel.commandapi</pattern>
+                                    <shadedPattern>com.github.akagiant.simpleluckyblocks</shadedPattern>
+                                </relocation>
+                            </relocations>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <outputFile>D:\Desktop\Minecraft Servers\1.19\plugins\${project.name}-v${project.version}.jar</outputFile>
                         </configuration>
@@ -90,5 +97,17 @@
             <artifactId>GiantAPI</artifactId>
             <version>0.1.32</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>dev.jorel</groupId>
+            <artifactId>commandapi-shade</artifactId>
+            <version>8.5.1</version>
+        </dependency>
+
     </dependencies>
 </project>
