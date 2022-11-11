@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -21,13 +22,16 @@ public class BossBarManager {
 	}
 	
 	// Handle Boss Bar Messages
-	public static void sendBossBarMessage(Collection<? extends Player> playerCollection, String path) {
+	public static void sendBossBarMessage(Collection<? extends Player> playerCollection, Player target, String path) {
 		int duration = ConfigUtil.getInt(SimpleJoin.config, path + ".duration");
 
-		org.bukkit.boss.BossBar bossBar = getBossBar(path);
+		BossBar bossBar = getBossBar(path);
 		if (bossBar == null) return;
 
+		bossBar.setTitle(MessageManager.formatPlaceholders(target, bossBar.getTitle()));
+
 		for (Player player : playerCollection) {
+			if (player.getUniqueId().equals(target.getUniqueId())) continue;
 			bossBar.addPlayer(player);
 		}
 
@@ -36,31 +40,26 @@ public class BossBarManager {
 			public void run() {
 				bossBar.removeAll();
 			}
-		}.runTaskLater(SimpleJoin.getPlugin(), duration);
-
-
+		}.runTaskLater(SimpleJoin.getPlugin(), (duration * 20L));
 	}
 
-	public static void sendBossBarMessage(Player player, String path) {
+	public static void sendBossBarMessage(Player receiver, Player target, String path) {
 		int duration = ConfigUtil.getInt(SimpleJoin.config, path + ".duration");
 
-		org.bukkit.boss.BossBar bossBar = getBossBar(path);
+		BossBar bossBar = getBossBar(path);
 		if (bossBar == null) return;
 
-		if (bossBar.getTitle().contains("%player_name%")) {
-			bossBar.getTitle().replace("%player_name%", player.getName());
-		}
-
-		bossBar.addPlayer(player);
+		bossBar.setTitle(MessageManager.formatPlaceholders(target, bossBar.getTitle()));
+		bossBar.addPlayer(receiver);
 		new BukkitRunnable() {
 			@Override
 			public void run() {
-				bossBar.removePlayer(player);
+				bossBar.removePlayer(receiver);
 			}
-		}.runTaskLater(SimpleJoin.getPlugin(), duration);
+		}.runTaskLater(SimpleJoin.getPlugin(), (duration * 20L));
 	}
 
-	private static org.bukkit.boss.BossBar getBossBar(String path) {
+	private static BossBar getBossBar(String path) {
 		String title = ConfigUtil.getString(SimpleJoin.config, path + ".title");
 		String stringBarColor = ConfigUtil.getString(SimpleJoin.config, path + ".color");
 		String stringBarStyle = ConfigUtil.getString(SimpleJoin.config, path + ".style");

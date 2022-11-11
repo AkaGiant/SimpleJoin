@@ -27,7 +27,7 @@ global-settings:
           duration: 100
           level: 10 # FULL NUMBER ONLY
       commands:
-        - "/say hello %player_name%"
+        - "/say hello %player_name% self"
         - "/my custom epic command here"
       # Settings for a Custom Title Message
       title-message:

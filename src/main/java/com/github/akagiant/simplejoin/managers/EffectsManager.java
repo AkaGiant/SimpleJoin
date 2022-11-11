@@ -2,9 +2,6 @@ package com.github.akagiant.simplejoin.managers;
 
 import com.github.akagiant.simplejoin.SimpleJoin;
 import com.github.akagiant.simplejoin.util.ConfigUtil;
-import com.github.akagiant.simplejoin.util.Logger;
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -15,8 +12,13 @@ import java.util.List;
 
 public class EffectsManager {
 
-	public static void addEffects(Collection<? extends Player> playerCollection, String path) {
+	private EffectsManager() {
+		//no instance
+	}
+	
+	public static void addEffects(Collection<? extends Player> playerCollection, Player target, String path) {
 		for (Player player : playerCollection) {
+			if (player.getUniqueId().equals(target.getUniqueId())) continue;
 			for (PotionEffect potionEffect : getEffects(path)) {
 				player.addPotionEffect(potionEffect);
 			}

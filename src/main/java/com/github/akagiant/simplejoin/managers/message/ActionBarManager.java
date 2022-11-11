@@ -16,14 +16,15 @@ public class ActionBarManager {
 	}
 	
 	// Handle Action Bar Messages
-	public static void sendActionBarMessage(Collection<? extends Player> playerCollection, String path) {
+	public static void sendActionBarMessage(Collection<? extends Player> playerCollection, Player target, String path) {
 		String message = ConfigUtil.getString(SimpleJoin.config, path + ".message");
 		int duration = ConfigUtil.getInt(SimpleJoin.config, path + ".duration");
 
 		if (duration == 0) { return; }
 
 		for (Player player : playerCollection) {
-			sendActionbar(player, message, duration);
+			if (player.getUniqueId().equals(target.getUniqueId())) continue;
+			sendActionbar(player, target, message, duration);
 		}
 	}
 
@@ -33,13 +34,12 @@ public class ActionBarManager {
 
 		if (duration == 0) { return; }
 
-		sendActionbar(player, message, duration);
-
+		sendActionbar(player, player, message, duration);
 	}
 
 	static int task;
 
-	private static void sendActionbar(Player player, String message, int duration){
+	private static void sendActionbar(Player player, Player target, String message, int duration) {
 		task = Bukkit.getScheduler().scheduleSyncRepeatingTask(SimpleJoin.getPlugin(), new Runnable() {
 
 			int time = 0;
@@ -50,7 +50,10 @@ public class ActionBarManager {
 					Bukkit.getScheduler().cancelTask(task);
 				} else {
 					time++;
-					player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(message));
+					player.spigot().sendMessage(
+							ChatMessageType.ACTION_BAR,
+							TextComponent.fromLegacyText(MessageManager.formatPlaceholders(target, message))
+					);
 				}
 
 			}

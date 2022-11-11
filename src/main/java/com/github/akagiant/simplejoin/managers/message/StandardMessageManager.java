@@ -14,12 +14,12 @@ public class StandardMessageManager {
 	}
 	
 	// Handle Normal Messages
-	public static void sendNormalMessage(Collection<? extends Player> playerCollection, String path) {
+	public static void sendNormalMessage(Collection<? extends Player> playerCollection, Player target, String path) {
 		List<String> messages = ConfigUtil.getStringList(SimpleJoin.config, path);
 		for (Player player : playerCollection) {
+			if (player.getUniqueId().equals(target.getUniqueId())) continue;
 			for (String str : messages) {
-				str = str.replace("%player_name%", player.getName());
-				player.sendMessage(str);
+				player.sendMessage(MessageManager.formatPlaceholders(target, str));
 			}
 		}
 	}
@@ -27,8 +27,7 @@ public class StandardMessageManager {
 	public static void sendNormalMessage(Player player, String path) {
 		List<String> messages = ConfigUtil.getStringList(SimpleJoin.config, path);
 		for (String str : messages) {
-			str = str.replace("%player_name%", player.getName());
-			player.sendMessage(str);
+			player.sendMessage(MessageManager.formatPlaceholders(player, str));
 		}
 	}
 

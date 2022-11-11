@@ -2,7 +2,6 @@ package com.github.akagiant.simplejoin.managers;
 
 import com.github.akagiant.simplejoin.SimpleJoin;
 import com.github.akagiant.simplejoin.util.ConfigUtil;
-import com.github.akagiant.simplejoin.util.Logger;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -30,7 +29,7 @@ public class SoundManager {
 		player.playSound(player.getLocation(), snd, (float) volume, (float) pitch);
 	}
 
-	public static void playSound(Collection<? extends Player> playerCollection, String path) {
+	public static void playSound(Collection<? extends Player> playerCollection, Player target, String path) {
 		String sound = ConfigUtil.getString(SimpleJoin.config, path + ".sound");
 		Sound snd;
 
@@ -44,6 +43,7 @@ public class SoundManager {
 		int pitch = ConfigUtil.getInt(SimpleJoin.config, path + ".settings.pitch");
 
 		for (Player player : playerCollection) {
+			if (player.getUniqueId().equals(target.getUniqueId())) continue;
 			player.playSound(player.getLocation(), snd, (float) volume, (float) pitch);
 		}
 

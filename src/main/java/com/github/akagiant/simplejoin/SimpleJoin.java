@@ -7,20 +7,23 @@ import dev.jorel.commandapi.CommandAPIConfig;
 import dev.jorel.commandapi.RegisteredCommand;
 import lombok.Getter;
 import me.akagiant.giantapi.util.Config;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class SimpleJoin extends JavaPlugin {
 
-	// TODO: Implement PlaceholderAPI
-	// TODO: Fix that messages will show receivers name, not the person that joins name.
-	// TODO: Tidy up code
 	// TODO: Comment code.
 
 	@Getter
 	private static Plugin plugin;
 
 	public static Config config;
+
+	public static boolean hasPAPI = false;
 
 	@Override
 	public void onLoad() {
@@ -44,6 +47,9 @@ public final class SimpleJoin extends JavaPlugin {
 
 		Logger.toConsole("&fCommands Loaded (&a" + (CommandAPI.getRegisteredCommands().size())+ "&f) &8| &fAliases: (&a" + getCommandAliasesCount() + "&f)");
 		Logger.toConsole("&fPermissions Loaded (&a" + (getPermissionsCount())+ "&f)");
+
+		findSoftDepends();
+		registerDependencies();
 
 		Logger.toConsole("&m————————————————————————————————————");
 		Logger.toConsole("&ahas been Enabled");
@@ -85,4 +91,30 @@ public final class SimpleJoin extends JavaPlugin {
 		}
 		return amount;
 	}
+
+	private void findSoftDepends() {
+		if (plugin.getDescription().getSoftDepend().isEmpty()) { return; }
+		Logger.toConsole("&m——————————&r &fSoft Dependencies &m&8————————");
+		Logger.toConsole("&fLooking for &a" + plugin.getDescription().getSoftDepend().size() + " &fSoft Dependencies");
+
+		List<String> found = new ArrayList<>();
+		List<String> missing = new ArrayList<>();
+		for (String dependency : plugin.getDescription().getSoftDepend()) {
+			if (Bukkit.getServer().getPluginManager().getPlugin(dependency) == null) missing.add(dependency);
+			else found.add(dependency);
+		}
+
+		if (!found.isEmpty()) Logger.toConsole("&fFound &8| &a" + String.join("&8, &a", found));
+		if (!missing.isEmpty()) Logger.toConsole("&fMissing &8| &c" + String.join("&8, &c", missing));
+
+	}
+
+	private void registerDependencies() {
+
+		if (Bukkit.getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+			new PlaceholderManager().register();
+			hasPAPI = true;
+		}
+	}
+
 }

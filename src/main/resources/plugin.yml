@@ -5,3 +5,4 @@ api-version: 1.19
 authors: [ AkaGiant ]
 description: A Simple Join and Leave Plugin designed for public usage, designed for those who just want basic features for their server.
 website: github.com/AkaGiant
+softdepend: [ PlaceholderAPI ]

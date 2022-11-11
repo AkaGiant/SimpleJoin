@@ -51,7 +51,7 @@ public class JoinManager {
 		}
 
 		if (ConfigUtil.isSet(config, path + ".boss-bar")) {
-			BossBarManager.sendBossBarMessage(player, path + ".boss-bar");
+			BossBarManager.sendBossBarMessage(player, player, path + ".boss-bar");
 		}
 
 		if (ConfigUtil.isSet(config, path + ".message")) {
@@ -68,31 +68,31 @@ public class JoinManager {
 		Config config = SimpleJoin.config;
 
 		if (ConfigUtil.isSet(config, path + ".sound-effect")) {
-			SoundManager.playSound(Bukkit.getOnlinePlayers(), path + ".sound-effect");
+			SoundManager.playSound(Bukkit.getOnlinePlayers(), player, path + ".sound-effect");
 		}
 
 		if (ConfigUtil.isSet(config, path + ".effects")) {
-			EffectsManager.addEffects(player, path + ".effects");
+			EffectsManager.addEffects(Bukkit.getOnlinePlayers(), player, path + ".effects");
 		}
 
 		if (ConfigUtil.isSet(config, path + ".commands")) {
-			CommandManager.runCommands(player, path + ".commands");
+			CommandManager.runCommands(Bukkit.getOnlinePlayers(), player, path + ".commands");
 		}
 
 		if (ConfigUtil.isSet(config, path + ".title-message")) {
-			TitleMessageManager.sendTitleMessage(player, path + ".title-message");
+			TitleMessageManager.sendTitleMessage(Bukkit.getOnlinePlayers(), player,  path + ".title-message");
 		}
 
 		if (ConfigUtil.isSet(config, path + ".boss-bar")) {
-			BossBarManager.sendBossBarMessage(player, path + ".boss-bar");
+			BossBarManager.sendBossBarMessage(Bukkit.getOnlinePlayers(), player, path + ".boss-bar");
 		}
 
 		if (ConfigUtil.isSet(config, path + ".message")) {
-			StandardMessageManager.sendNormalMessage(player, path + ".message");
+			StandardMessageManager.sendNormalMessage(Bukkit.getOnlinePlayers(), player, path + ".message");
 		}
 
 		if (ConfigUtil.isSet(config, path + ".action-bar")) {
-			ActionBarManager.sendActionBarMessage(player, path + ".action-bar");
+			ActionBarManager.sendActionBarMessage(Bukkit.getOnlinePlayers(), player, path + ".action-bar");
 		}
 	}
 
