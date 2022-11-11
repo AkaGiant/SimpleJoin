@@ -36,24 +36,24 @@ public class EffectsManager {
 
 			String value = ConfigUtil.getString(SimpleJoin.config, path + "." + key + ".effect");
 			int duration = ConfigUtil.getInt(SimpleJoin.config, path + "." + key + ".duration");
-			int level = ConfigUtil.getInt(SimpleJoin.config, path + "." + key + "level");
+			int level = ConfigUtil.getInt(SimpleJoin.config, path + "." + key + ".level");
 
 			PotionEffectType effect = PotionEffectType.getByName(value);
 			if (effect == null) {
-				Logger.severe("&f" + path + "." + key + ".effect is not a valid type of effect.");
+				ConfigUtil.logError(SimpleJoin.config, path + "." + key + ".effect", value + " is not a valid type of effect.", "https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/potion/PotionEffectType.html", "Effect");
 				continue;
 			}
 
 			if (duration == 0) {
-				Logger.severe("&f" + path + "." + key + ".duration is not a valid duration.");
+				ConfigUtil.logError(SimpleJoin.config, path + "." + key + ".duration", duration + " is not a valid duration.", null, ConfigUtil.wholeNumber);
 				continue;
 			}
 
 			if (level == 0) {
-				Logger.severe("&f" + path + "." + key + ".duration is not a valid level.");
+				ConfigUtil.logError(SimpleJoin.config, path + "." + key + ".level", level + " is not a valid number.", ConfigUtil.wholeNumber);
 				continue;
 			}
-			potionEffects.add(new PotionEffect(effect, duration, level));
+			potionEffects.add(new PotionEffect(effect, duration * 20, level));
 		}
 		return potionEffects;
 	}

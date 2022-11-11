@@ -22,7 +22,7 @@ public class TitleMessageManager {
 		int stay = ConfigUtil.getInt(SimpleJoin.config, path + ".settings.stay");
 
 		for (Player player : playerCollection) {
-			player.sendTitle(title, subTitle, fadeIn, stay, fadeOut);
+			player.sendTitle(title, subTitle, fadeIn * 20, stay * 20, fadeOut * 20);
 		}
 
 	}
@@ -32,11 +32,15 @@ public class TitleMessageManager {
 		String title = ConfigUtil.getString(SimpleJoin.config, path + ".title");
 		String subTitle = ConfigUtil.getString(SimpleJoin.config, path + ".sub-title");
 
+		title = title.replace("%player_name%", player.getName());
+		subTitle = subTitle.replace("%player_name%", player.getName());
+
+
 		int fadeIn = ConfigUtil.getInt(SimpleJoin.config, path + ".settings.fade-in");
 		int fadeOut = ConfigUtil.getInt(SimpleJoin.config, path + ".settings.fade-out");
 		int stay = ConfigUtil.getInt(SimpleJoin.config, path + ".settings.stay");
 
-		player.sendTitle(title, subTitle, fadeIn, stay, fadeOut);
+		player.sendTitle(title, subTitle, fadeIn * 20, stay * 20, fadeOut * 20);
 	}
 
 }

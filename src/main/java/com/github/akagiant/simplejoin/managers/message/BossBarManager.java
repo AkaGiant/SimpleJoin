@@ -47,6 +47,10 @@ public class BossBarManager {
 		org.bukkit.boss.BossBar bossBar = getBossBar(path);
 		if (bossBar == null) return;
 
+		if (bossBar.getTitle().contains("%player_name%")) {
+			bossBar.getTitle().replace("%player_name%", player.getName());
+		}
+
 		bossBar.addPlayer(player);
 		new BukkitRunnable() {
 			@Override

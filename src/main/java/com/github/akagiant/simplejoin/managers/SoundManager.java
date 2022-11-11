@@ -21,11 +21,11 @@ public class SoundManager {
 		try {
 			snd = Sound.valueOf(sound);
 		} catch (IllegalArgumentException exception) {
-			Logger.severe("&f" + path + ".sound is not a valid type of sound.");
+			ConfigUtil.logError(SimpleJoin.config, path, sound + " is not a valid sound", "https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html", "Valid Sound");
 			return;
 		}
-		double volume = ConfigUtil.getDouble(SimpleJoin.config, path + ".settings.volume");
-		double pitch = ConfigUtil.getDouble(SimpleJoin.config, path + ".settings.pitch");
+		double volume = ConfigUtil.getInt(SimpleJoin.config, path + ".settings.volume");
+		double pitch = ConfigUtil.getInt(SimpleJoin.config, path + ".settings.pitch");
 
 		player.playSound(player.getLocation(), snd, (float) volume, (float) pitch);
 	}
@@ -37,11 +37,11 @@ public class SoundManager {
 		try {
 			snd = Sound.valueOf(sound);
 		} catch (IllegalArgumentException exception) {
-			Logger.severe("&f" + path + ".sound is not a valid type of sound.");
+			ConfigUtil.logError(SimpleJoin.config, path, sound + " is not a valid sound", "https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html", "Valid Sound");
 			return;
 		}
-		double volume = ConfigUtil.getDouble(SimpleJoin.config, path + ".settings.volume");
-		double pitch = ConfigUtil.getDouble(SimpleJoin.config, path + ".settings.pitch");
+		int volume = ConfigUtil.getInt(SimpleJoin.config, path + ".settings.volume");
+		int pitch = ConfigUtil.getInt(SimpleJoin.config, path + ".settings.pitch");
 
 		for (Player player : playerCollection) {
 			player.playSound(player.getLocation(), snd, (float) volume, (float) pitch);

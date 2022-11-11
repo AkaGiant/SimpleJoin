@@ -34,4 +34,10 @@ public class Logger {
 		);
 	}
 
+	public static void dev(String msg) {
+		Bukkit.getConsoleSender().sendMessage(
+				ColorManager.formatColours("&8[&d" + SimpleJoin.getPlugin().getName() + " &lDEV&8] &f" + msg)
+		);
+	}
+
 }

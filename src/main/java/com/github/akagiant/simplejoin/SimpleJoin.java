@@ -1,5 +1,6 @@
 package com.github.akagiant.simplejoin;
 
+import com.github.akagiant.simplejoin.listeners.OnJoin;
 import com.github.akagiant.simplejoin.util.Logger;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIConfig;
@@ -8,14 +9,17 @@ import lombok.Getter;
 import me.akagiant.giantapi.util.Config;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.checkerframework.checker.units.qual.C;
 
 public final class SimpleJoin extends JavaPlugin {
+
+	// TODO: Implement PlaceholderAPI
+	// TODO: Fix that messages will show receivers name, not the person that joins name.
+	// TODO: Tidy up code
+	// TODO: Comment code.
 
 	@Getter
 	private static Plugin plugin;
 
-	@Getter
 	public static Config config;
 
 	@Override
@@ -63,7 +67,7 @@ public final class SimpleJoin extends JavaPlugin {
 	}
 
 	private void registerEvents() {
-
+		getServer().getPluginManager().registerEvents(new OnJoin(), this);
 	}
 
 	private int getPermissionsCount() {

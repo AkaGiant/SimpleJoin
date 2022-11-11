@@ -15,17 +15,18 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class JoinManager {
 
-	private final static String path = "global-settings.first-join";
-
+	private JoinManager() {
+		//no instance
+	}
+	
 	public static void firstJoin(Player player, PlayerJoinEvent e) {
-		if (!firstJoinEnabled()) {
-			e.setJoinMessage("");
-			return;
-		}
+//		if (!firstJoinEnabled()) {
+//			e.setJoinMessage("");
+//			return;
+//		}
 
 		handleToPlayer(player, e);
 		handleToEveryone(player, e);
-
 	}
 
 	private static void handleToPlayer(Player player, PlayerJoinEvent e) {
@@ -45,6 +46,7 @@ public class JoinManager {
 		}
 
 		if (ConfigUtil.isSet(config, path + ".title-message")) {
+			Bukkit.getLogger().severe("Sending Title Message");
 			TitleMessageManager.sendTitleMessage(player, path + ".title-message");
 		}
 
@@ -95,7 +97,7 @@ public class JoinManager {
 	}
 
 	private static boolean firstJoinEnabled() {
-		return ConfigUtil.getBoolean(SimpleJoin.config, path + ".enabled");
+		return ConfigUtil.getBoolean(SimpleJoin.config, "global-settings.first-join.enabled");
 	}
 
 }

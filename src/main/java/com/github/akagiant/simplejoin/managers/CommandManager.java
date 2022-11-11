@@ -1,6 +1,7 @@
 package com.github.akagiant.simplejoin.managers;
 
 import com.github.akagiant.simplejoin.SimpleJoin;
+import com.github.akagiant.simplejoin.util.ConfigUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -13,7 +14,7 @@ public class CommandManager {
 	}
 
 	public static void runCommands(Collection<? extends Player> playerCollection, String path) {
-		for (String stringCmd : SimpleJoin.config.getConfig().getConfigurationSection(path).getKeys(false)) {
+		for (String stringCmd : ConfigUtil.getStringList(SimpleJoin.config, path)) {
 			for (Player player : playerCollection) {
 				stringCmd = stringCmd.replace("/", "");
 				stringCmd = stringCmd.replace("%player_name%", player.getName());
@@ -23,7 +24,7 @@ public class CommandManager {
 	}
 
 	public static void runCommands(Player player, String path) {
-		for (String stringCmd : SimpleJoin.config.getConfig().getConfigurationSection(path).getKeys(false)) {
+		for (String stringCmd : ConfigUtil.getStringList(SimpleJoin.config, path)) {
 			stringCmd = stringCmd.replace("/", "");
 			stringCmd = stringCmd.replace("%player_name%", player.getName());
 			Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), stringCmd);

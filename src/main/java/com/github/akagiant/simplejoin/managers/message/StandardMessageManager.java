@@ -18,6 +18,7 @@ public class StandardMessageManager {
 		List<String> messages = ConfigUtil.getStringList(SimpleJoin.config, path);
 		for (Player player : playerCollection) {
 			for (String str : messages) {
+				str = str.replace("%player_name%", player.getName());
 				player.sendMessage(str);
 			}
 		}
@@ -26,6 +27,7 @@ public class StandardMessageManager {
 	public static void sendNormalMessage(Player player, String path) {
 		List<String> messages = ConfigUtil.getStringList(SimpleJoin.config, path);
 		for (String str : messages) {
+			str = str.replace("%player_name%", player.getName());
 			player.sendMessage(str);
 		}
 	}

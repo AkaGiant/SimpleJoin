@@ -20,10 +20,10 @@ public class OnJoin implements Listener {
 	@EventHandler (priority = EventPriority.HIGHEST)
 	public void onJoin(PlayerJoinEvent e) {
 		Player player = e.getPlayer();
-		if (!player.hasPlayedBefore()) {
+//		if (!player.hasPlayedBefore()) {
 			JoinManager.firstJoin(player, e);
 			return;
-		}
+//		}
 	}
 
 	@EventHandler (priority = EventPriority.HIGHEST)

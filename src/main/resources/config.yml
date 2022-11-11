@@ -19,14 +19,13 @@ global-settings:
       effects:
         1:
           # Will apply Strength 4, for 100 seconds to the player.
-          effect: STRENGTH
+          effect: INCREASE_DAMAGE
           duration: 100
           level: 4 # FULL NUMBER ONLY
         2:
-          effect: HASTE
-          duration: 10000
+          effect: FAST_DIGGING
+          duration: 100
           level: 10 # FULL NUMBER ONLY
-
       commands:
         - "/say hello %player_name%"
         - "/my custom epic command here"
@@ -46,12 +45,15 @@ global-settings:
         style: SOLID
         flags:
           - CREATE_FOG
+        duration: 5
       # Settings for a Custom Message
       message:
         - "line 1"
         - "line 2"
       # Settings for a Custom Action Bar
-      action-bar: "This will appear above the player's hot bar"
+      action-bar:
+        message: "This will appear above the player's hot bar"
+        duration: 5
 
     # Settings for messages shown to all online players (EXCLUDING THE PLAYER THAT JOINED)
     to-everyone-online:
@@ -69,14 +71,14 @@ global-settings:
       effects:
         1:
           # Will apply Strength 4, for 100 seconds to the player.
-          effect: STRENGTH
+          effect: INCREASE_DAMAGE
           duration: 100
           level: 4 # FULL NUMBER ONLY
         2:
-          effect: HASTE
-          duration: 10000
+          effect: FAST_DIGGING
+          duration: 100
           level: 10 # FULL NUMBER ONLY
-      # Commands will be ran for every player so I really would NOT recommend using any
+      # Commands will be run for every player, so I really would NOT recommend using any
       # broadcast command here!
       commands:
         - "/say hello %player_name% joined "
@@ -96,9 +98,12 @@ global-settings:
         style: SOLID
         flags:
           - CREATE_FOG
+        duration: 5
       # Settings for a Custom Message
       message:
         - "%player_name% joined for the first time!"
         - "line 2"
       # Settings for a Custom Action Bar
-      action-bar: "%player_name% joined for the first time!"
+      action-bar:
+        message: "This will appear above the player's hot bar"
+        duration: 5
