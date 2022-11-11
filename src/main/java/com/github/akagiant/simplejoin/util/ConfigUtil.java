@@ -62,7 +62,6 @@ public class ConfigUtil {
 		}
 
 		return config.getConfig().getDouble(path);
-
 	}
 
 	public static int getInt(Config config, String path) {
@@ -83,7 +82,6 @@ public class ConfigUtil {
 		return config.getConfig().isSet(path) && config.getConfig().getString(path) != null;
 	}
 
-
 	public static boolean getBoolean(Config config, String path) {
 		return config.getConfig().isSet(path) && config.getConfig().getBoolean(path);
 	}
@@ -101,9 +99,7 @@ public class ConfigUtil {
 		Logger.severe("&fFile: " + config.getFile().getName());
 		Logger.severe("&fPath: ");
 		printPath(path, expected);
-		if (url != null) {
-			Logger.severe("&b" + url + " &ffor more information");
-		}
+		if (url != null) { Logger.severe("&b" + url + " &ffor more information"); }
 
 		Logger.severe("&m————————————————————————————————————");
 	}
@@ -111,21 +107,19 @@ public class ConfigUtil {
 	private static void printPath(String path, String... expected) {
 		String[] splitPath = path.split("\\.");
 		for (int i = 0; i < splitPath.length; i++) {
-			String whiteSpace = new String(new char[i]).replace("\0", "  ");
-			if (i == splitPath.length - 1) {
-				if (expected.length > 1) {
-					Logger.severe("&f" + whiteSpace + splitPath[i] + ": <- Expected " + Arrays.toString(expected));
-					for (String str : expected) {
-						Logger.severe("&f" + whiteSpace + " - " + str);
-					}
-					return;
-				} else {
-					Logger.severe("&f" + whiteSpace + splitPath[i] + ": <- Expected " + Arrays.toString(expected));
-				}
-			} else {
+
+			final String whiteSpace = new String(new char[i]).replace("\0", "  ");
+
+			if (i != splitPath.length - 1) {
 				Logger.severe("&f" + whiteSpace + splitPath[i] + ":");
+				return;
 			}
 
+			Logger.severe("&f" + whiteSpace + splitPath[i] + ": <- Expected " + Arrays.toString(expected));
+			if (expected.length < 1) return;
+			for (String str : expected) {
+				Logger.severe("&f" + whiteSpace + " - " + str);
+			}
 		}
 	}
 }

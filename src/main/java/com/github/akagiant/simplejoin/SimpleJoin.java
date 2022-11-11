@@ -16,13 +16,9 @@ import java.util.List;
 
 public final class SimpleJoin extends JavaPlugin {
 
-	// TODO: Comment code.
-
 	@Getter
 	private static Plugin plugin;
-
 	public static Config config;
-
 	public static boolean hasPAPI = false;
 
 	@Override
