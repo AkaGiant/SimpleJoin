@@ -1,4 +1,4 @@
-package com.github.akagiant.simplejoin.managers.message;
+package com.github.akagiant.simplejoin.systemmanagers.message;
 
 import com.github.akagiant.simplejoin.SimpleJoin;
 import me.clip.placeholderapi.PlaceholderAPI;

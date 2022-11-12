@@ -1,7 +1,7 @@
-package com.github.akagiant.simplejoin.managers;
+package com.github.akagiant.simplejoin.systemmanagers;
 
 import com.github.akagiant.simplejoin.SimpleJoin;
-import com.github.akagiant.simplejoin.managers.message.MessageManager;
+import com.github.akagiant.simplejoin.systemmanagers.message.MessageManager;
 import com.github.akagiant.simplejoin.util.ConfigUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

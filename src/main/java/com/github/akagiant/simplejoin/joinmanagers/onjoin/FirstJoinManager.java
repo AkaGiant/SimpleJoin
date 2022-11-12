@@ -1,29 +1,30 @@
-package com.github.akagiant.simplejoin;
+package com.github.akagiant.simplejoin.joinmanagers.onjoin;
 
-import com.github.akagiant.simplejoin.managers.CommandManager;
-import com.github.akagiant.simplejoin.managers.EffectsManager;
-import com.github.akagiant.simplejoin.managers.SoundManager;
-import com.github.akagiant.simplejoin.managers.message.ActionBarManager;
-import com.github.akagiant.simplejoin.managers.message.BossBarManager;
-import com.github.akagiant.simplejoin.managers.message.StandardMessageManager;
-import com.github.akagiant.simplejoin.managers.message.TitleMessageManager;
+import com.github.akagiant.simplejoin.SimpleJoin;
+import com.github.akagiant.simplejoin.systemmanagers.CommandManager;
+import com.github.akagiant.simplejoin.systemmanagers.EffectsManager;
+import com.github.akagiant.simplejoin.systemmanagers.SoundManager;
+import com.github.akagiant.simplejoin.systemmanagers.message.ActionBarManager;
+import com.github.akagiant.simplejoin.systemmanagers.message.BossBarManager;
+import com.github.akagiant.simplejoin.systemmanagers.message.StandardMessageManager;
+import com.github.akagiant.simplejoin.systemmanagers.message.TitleMessageManager;
 import com.github.akagiant.simplejoin.util.ConfigUtil;
 import me.akagiant.giantapi.util.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class JoinManager {
+public class FirstJoinManager {
 
-	private JoinManager() {
+	private FirstJoinManager() {
 		//no instance
 	}
 	
 	public static void firstJoin(Player player, PlayerJoinEvent e) {
-//		if (!firstJoinEnabled()) {
-//			e.setJoinMessage("");
-//			return;
-//		}
+		if (!firstJoinEnabled()) {
+			e.setJoinMessage("");
+			return;
+		}
 
 		handleToPlayer(player, e);
 		handleToEveryone(player, e);
