@@ -1,0 +1,6 @@
+name: SimpleJoin
+version: '${project.version}'
+main: com.github.akagiant.simplejoin.SimpleJoin
+api-version: 1.19
+
+softdepend: [ "PlaceholderAPI" ]

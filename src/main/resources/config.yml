@@ -1,0 +1,59 @@
+# This plugin does require a permission plugin to work unless you only wish to modify
+# The global message. Which case, you may wish to only modify the default group and
+# disable the first-join system.
+
+first-join:
+  enabled: true # You CAN remove this altogether, by doing so it will default to TRUE
+  to-player:
+    # What sound effects should be played to the player when they first join?
+    # https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
+    sound-effect:
+      sound: UI_TOAST_CHALLENGE_COMPLETE
+      settings:
+        volume: 1
+        pitch: 1
+    message:
+      - "&b&lNEW &8» &fWelcome &b%player_name% &fto &bServer Name Here &8(&b#[total joined]&8)"
+  # Settings for messages shown to all online players (EXCLUDING THE PLAYER THAT JOINED)
+  to-everyone-online:
+    # Settings for a Custom Message
+    message:
+      - "&b&lNEW &8» &fWelcome &b%player_name% &fto &bServer Name Here &8(&b#[total joined]&8)"
+
+groups:
+  owner:
+    # You can enable or disable certain groups from viewing join leave messages
+    # Under the visible-by: section. By default, all groups can see all groups.
+    # If you then mention one group, that is the only group that can see it.
+    visible-by:
+      default: true # Now only the default grouping will see an owner join
+    on-join:
+      # Global will only showcase to groups that have visible-by: true
+      # All Settings will IGNORE the player that joined for GLOBAL
+      global:
+        message:
+          - "&a(+) Owner &8| &a%player_name%"
+      # Self with only run once and will only run for the player that joined.
+      self:
+        message:
+          - "&a(+) Owner &8| &a%player_name%"
+        action-bar:
+          message: "ha u suck"
+          duration: 5
+    on-quit:
+      global:
+        # Global will only showcase to groups that have visible-by: true
+        message:
+          - "&c(-) Owner &8| &c%player_name%"
+  default:
+    on-join:
+      global:
+        message:
+          - "&a(+) &8| &a%player_name%"
+      self:
+        message:
+          - "&a(+) &8| &a%player_name%"
+    on-quit:
+      global:
+        message:
+          - "&c(-) &8| &c%player_name%"
